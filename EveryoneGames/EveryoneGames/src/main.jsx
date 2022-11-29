@@ -9,17 +9,24 @@ import App from './App'
 import './index.css'
 import Root from './routes/root';
 import ErrorPage from './routes/errorPage';
-import { configureStore } from '@reduxjs/toolkit';
-import mainContentReducer from './reducers/mainContent';
+import { configureStore, applyMiddleware } from '@reduxjs/toolkit';
+import mainContentReducer, { fetchMain } from './reducers/mainContent';
+import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux';
+import thunkMiddleware from 'redux-thunk'
+
+const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
 const store = configureStore({
   reducer: {
     mainContent: mainContentReducer,
   },
   
-},+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+},+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
+composedEnhancer
 )
+
+store.dispatch(fetchMain);
 
 const router = createBrowserRouter([
   {
@@ -46,8 +53,7 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById('root')).render(
     <React.StrictMode>
       <Provider store={store} >
-        {/* <RouterProvider router={router} /> */}
-        <Root />
+        <RouterProvider router={router} />
       </Provider>
     </React.StrictMode>  
     

@@ -7,3 +7,11 @@ export const fourHighCrit = async() =>{
     });
     return response.data.results;
 }
+
+export const mainBodyContent = async() =>{
+    const response = await axios({
+        method:"get",
+        url:"https://api.rawg.io/api/games?key=d9e71ebfadd443cf87cf12c16f68b087&ordering=-released&page_size=10"
+    });
+    return response.data.results;
+}

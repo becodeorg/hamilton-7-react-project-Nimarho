@@ -4,11 +4,19 @@ import Hero from './components/Hero';
 import { getNewTrendyGames } from './logic';
 import { fourHighCrit } from "../apiCalls";
 import { v4 as uuidv4 } from 'uuid';
+import { useSelector, useDispatch } from 'react-redux';
+import { loadMain } from '../actions';
+import MainBody from './components/MainBody';
 
 
 export default function Root(props){
     const [newTrendyGames, setNewTrendyGames] = useState([]);
     const limitApiCalls = useRef(false);
+    const mainContent = useSelector(state => state.mainContent);
+    const dispatch = useDispatch();
+
+
+
     console.log(limitApiCalls.current);
     useEffect( ()=>{
         if(limitApiCalls.current){
@@ -37,6 +45,11 @@ export default function Root(props){
                 console.log(games);
                 setNewTrendyGames(games);
             }
+            console.log("mainContent");
+            console.log(mainContent);
+            dispatch(loadMain());
+            console.log("mainContent");
+            console.log(mainContent);
             fetchData();
             limitApiCalls.current = true;
         }
@@ -46,7 +59,7 @@ export default function Root(props){
     <div>
         <NavBar />
         <Hero newTrendyGames={newTrendyGames} />
-        
+        <MainBody />
     </div>
     )
 }

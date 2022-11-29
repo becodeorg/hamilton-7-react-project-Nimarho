@@ -5,7 +5,7 @@ const Hero = ({newTrendyGames}) =>{
     return (
         <div className="flex flex-row w-full justify-evenly pt-5">
             
-            {this.newTrendyGames.map((game) => (
+            {newTrendyGames.map((game) => (
                 <SingleHero key={game.id} game={game} />
             ))}
         

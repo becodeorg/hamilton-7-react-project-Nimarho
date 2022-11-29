@@ -9,6 +9,17 @@ import App from './App'
 import './index.css'
 import Root from './routes/root';
 import ErrorPage from './routes/errorPage';
+import { configureStore } from '@reduxjs/toolkit';
+import mainContentReducer from './reducers/mainContent';
+import { Provider } from 'react-redux';
+
+const store = configureStore({
+  reducer: {
+    mainContent: mainContentReducer,
+  },
+  
+},+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+)
 
 const router = createBrowserRouter([
   {
@@ -33,7 +44,11 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <RouterProvider router={router} />
-  </React.StrictMode>
+    <React.StrictMode>
+      <Provider store={store} >
+        {/* <RouterProvider router={router} /> */}
+        <Root />
+      </Provider>
+    </React.StrictMode>  
+    
 )

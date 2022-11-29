@@ -7,7 +7,7 @@ const SingleHero = (game) =>{
     const gameName = game.game.name;
     return(
         <div className="relative w-1/5 overflow-hidden">
-            <img src={backGroundImg} alt="Game pic" srcset="" />
+            <img src={backGroundImg} alt="Game pic" />
             <span className="absolute bottom-0">{gameName.slice(0,9)}</span>
         </div>
     );

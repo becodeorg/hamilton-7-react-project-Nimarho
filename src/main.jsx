@@ -14,12 +14,14 @@ import mainContentReducer, { fetchMain } from './reducers/mainContent';
 import { composeWithDevTools } from 'redux-devtools-extension'
 import { Provider } from 'react-redux';
 import thunkMiddleware from 'redux-thunk'
+import heroContentReducer, { fetchHero } from './reducers/heroContent';
 
 const composedEnhancer = composeWithDevTools(applyMiddleware(thunkMiddleware))
 
 const store = configureStore({
   reducer: {
     mainContent: mainContentReducer,
+    heroContent: heroContentReducer
   },
   
 },+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__(),
@@ -27,6 +29,7 @@ composedEnhancer
 )
 
 store.dispatch(fetchMain);
+store.dispatch(fetchHero);
 
 const router = createBrowserRouter([
   {

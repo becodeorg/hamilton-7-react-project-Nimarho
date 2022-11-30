@@ -17,15 +17,12 @@ export default function Root(props){
 
 
 
-    console.log(limitApiCalls.current);
     useEffect( ()=>{
         if(limitApiCalls.current){
             console.log("true");
         }else{
             const fetchData = async() =>{
                 const gameList = await fourHighCrit();
-                console.log("gameList : ");
-                console.log(gameList);
                 const games = [];
                 for (const iterator of gameList) {
                     const game = {
@@ -42,14 +39,9 @@ export default function Root(props){
                     
                 }
                 console.log("API call");
-                console.log(games);
                 setNewTrendyGames(games);
             }
-            console.log("mainContent");
-            console.log(mainContent);
-            dispatch(loadMain());
-            console.log("mainContent");
-            console.log(mainContent);
+            // dispatch(loadMain());
             fetchData();
             limitApiCalls.current = true;
         }

@@ -5,34 +5,7 @@ import axios from "axios";
 const mainContentReducer = (state =[],action)=>{
     switch(action.type){
         case 'LOAD':{
-            // const fetchData = async() =>{
-            //     const gameList = await mainBodyContent();
-            //     console.log("gameList : ");
-            //     console.log(gameList);
-            //     const games = [];
-            //     for (const iterator of gameList) {
-            //         const game = {
-            //             "id" : uuidv4(),
-            //             "name" : iterator.name,
-            //             "date" : iterator.released,
-            //             "rating" : iterator.rating,
-            //             "platforms" : iterator.platforms,
-            //             "genres" : iterator.genres,
-            //             "bgImg" : iterator.background_image,
-            //             "screeshots" : iterator.short_screenshots
-            //         };
-            //         games.push(game);
-                    
-            //     }
-            //     console.log("API call mainbodycontent");
-            //     console.log(games);
-            //     return(games);
-            // }
-            // const gameList = fetchData();
-            // console.log("mainContent gamelist");
-            // //console.log(gameList);
-            console.log(action.payload);
-            return {...action.payload};
+            return action.payload;
         }
         default:
             return state;
@@ -40,9 +13,14 @@ const mainContentReducer = (state =[],action)=>{
 }
 
 export async function fetchMain(dispatch, getState) {
-    const gameList = await mainBodyContent();
-    console.log("gameList : ");
-    console.log(gameList);
+    const date = new Date();
+    const day = date.getDate();
+    const month = date.getMonth();
+    const year = date.getFullYear();
+    const yearMOne = year-1;
+    const request = `${yearMOne}-${month}-${day},${year}-${month}-${day}`;
+    console.log(request);
+    const gameList = await mainBodyContent(request);
     const games = [];
     for (const iterator of gameList) {
         const game = {
@@ -58,7 +36,7 @@ export async function fetchMain(dispatch, getState) {
         games.push(game);
         
     }
-    console.log(games);
+    console.log("API call for maincontent");
     dispatch({ type: 'LOAD', payload: games })
   }
 

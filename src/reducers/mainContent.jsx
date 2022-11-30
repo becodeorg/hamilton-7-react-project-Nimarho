@@ -19,12 +19,12 @@ export async function fetchMain(dispatch, getState) {
     const year = date.getFullYear();
     const yearMOne = year-1;
     const request = `${yearMOne}-${month}-${day},${year}-${month}-${day}`;
-    console.log(request);
     const gameList = await mainBodyContent(request);
+    console.log();
     const games = [];
     for (const iterator of gameList) {
         const game = {
-            id : uuidv4(),
+            id : iterator.id,
             name : iterator.name,
             date : iterator.released,
             rating : iterator.rating,

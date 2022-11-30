@@ -12,8 +12,6 @@ import MainBody from './components/MainBody';
 export default function Root(props){
     const [newTrendyGames, setNewTrendyGames] = useState([]);
     const limitApiCalls = useRef(false);
-    const mainContent = useSelector(state => state.mainContent);
-    const dispatch = useDispatch();
 
 
 
@@ -41,7 +39,6 @@ export default function Root(props){
                 console.log("API call");
                 setNewTrendyGames(games);
             }
-            // dispatch(loadMain());
             fetchData();
             limitApiCalls.current = true;
         }

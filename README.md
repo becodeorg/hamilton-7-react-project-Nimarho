@@ -1,4 +1,4 @@
 # This is my project for Everyone Games
 
 ## Netlify Link
-    Coming soon
+    https://melodious-blini-9660bb.netlify.app/
